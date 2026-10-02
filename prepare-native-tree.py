@@ -29,7 +29,7 @@ def prepare(output, upstream):
     vendor = output
     with tarfile.open(archive) as package:
         for member in package.getmembers():
-            relative = Path(member.name).relative_to('gpui-pre-0.3.5')
+            relative = Path(member.name).relative_to(upstream.name)
             if '..' in relative.parts or member.issym() or member.islnk():
                 raise ValueError('Unsafe archive member')
             if member.isdir():
@@ -67,8 +67,8 @@ def prepare(output, upstream):
             '            force_disabled,\n            automation_enabled: false,\n'
             '            automation_bounds: FxHashMap::default(),\n')
     replace(a11y,
-            'self.active_this_frame = !self.force_disabled && self.active_flag.load(Ordering::SeqCst);',
-            'self.active_this_frame = !self.force_disabled\n'
+            'self.active_this_frame = self.is_enabled() && self.active_flag.load(Ordering::SeqCst);',
+            'self.active_this_frame = self.is_enabled()\n'
             '            && (self.automation_enabled || self.active_flag.load(Ordering::SeqCst));')
     replace(a11y, '        self.node_bounds.clear();',
             '        self.node_bounds.clear();\n        self.automation_bounds.clear();')
@@ -106,6 +106,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path, help='New, nonexistent patched dependency directory')
     parser.add_argument('--upstream', type=Path, required=True,
-                        help='Unmodified cached gpui-pre 0.3.5 source; never edited')
+                        help='Unmodified cached gpui-pre source (the version in patches/upstream.json); never edited')
     args = parser.parse_args()
     print(prepare(args.output.resolve(), args.upstream.resolve()))

@@ -15,7 +15,7 @@ gpui_task({
 
 No screenshots sent to the model. No browser, CDP, global mouse/keyboard driver, or second text-generation model. Your main coding model delegates the entire workflow once.
 
-> **Experimental developer toolkit, macOS-first.** This works with apps you own and explicitly instrument—not arbitrary installed GPUI apps. It currently requires **gpui-pre 0.3.5, the included additive framework patch, and one startup hook**. Use disposable fixtures, not personal data. GitHub source is available under MIT; there are no npm, PyPI, or crates.io releases.
+> **Experimental developer toolkit, macOS-first.** This works with apps you own and explicitly instrument—not arbitrary installed GPUI apps. It currently requires **gpui-pre 0.3.7, the included additive framework patch, and one startup hook**. Use disposable fixtures, not personal data. GitHub source is available under MIT; there are no npm, PyPI, or crates.io releases.
 
 ## How it works
 
@@ -57,7 +57,7 @@ cargo fetch
 # Cargo's registry files are never modified.
 python3 prepare-native-tree.py vendor/gpui-pre --upstream \
   "$(find "${CARGO_HOME:-$HOME/.cargo}/registry/src" -mindepth 2 -maxdepth 2 \
-      -type d -name gpui-pre-0.3.5)"
+      -type d -name gpui-pre-0.3.7)"
 
 cargo --config 'patch.crates-io.gpui-pre.path="vendor/gpui-pre"' \
   build --features demo --example counter --release
@@ -144,7 +144,7 @@ Full configuration, text entry, statuses, library usage, and limits: **[TypeScri
 
 ## Add your own GPUI app
 
-1. Use the matched `gpui-pre = "=0.3.5"` stack. Prepare its patched dependency as above, and put the patch in **your workspace root**:
+1. Use the matched `gpui-pre = "=0.3.7"` stack. Prepare its patched dependency as above, and put the patch in **your workspace root**:
 
    ```toml
    [patch.crates-io]

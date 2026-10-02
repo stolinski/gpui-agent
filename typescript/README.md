@@ -4,7 +4,7 @@ One `gpui_task` invocation owns observe → Jev decisions → native input → c
 
 ## Setup
 
-First follow the [root README](../README.md) to build the patched GPUI Counter, create `.env`, and copy `examples/gpui-agent.json` to `.gpui-agent.json`. The bridge requires **gpui-pre 0.3.5**, its pinned patch, and one app startup hook; an arbitrary unmodified GPUI binary cannot be driven.
+First follow the [root README](../README.md) to build the patched GPUI Counter, create `.env`, and copy `examples/gpui-agent.json` to `.gpui-agent.json`. The bridge requires **gpui-pre 0.3.7**, its pinned patch, and one app startup hook; an arbitrary unmodified GPUI binary cannot be driven.
 
 From the repository root:
 
